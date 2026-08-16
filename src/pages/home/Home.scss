@@ -1,0 +1,129 @@
+.home-container {
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+  padding: 15px;
+
+  .summary-cards {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-bottom: 20px;
+
+    .card {
+      width: 90px;
+      height: 70px;
+      background: #050505;
+      border-radius: 8px;
+      border: 1px solid #1a1a1a;
+      text-align: center;
+      padding: 10px;
+
+      h3 {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      h1 {
+        margin-top: 8px;
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      &.broker-card {
+        width: 180px;
+        height: auto;
+        text-align: left;
+
+        p {
+          margin: 4px 0 0;
+          font-size: 11px;
+          color: #94a3b8;
+        }
+
+        small {
+          display: block;
+          margin-top: 6px;
+          color: #64748b;
+          font-size: 10px;
+        }
+
+        .refresh-btn {
+          margin-top: 8px;
+          width: 100%;
+          height: 28px;
+          border: none;
+          border-radius: 14px;
+          background: #0057d9;
+          color: #fff;
+          font-size: 11px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .market-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+
+    .market-box {
+      background: #050505;
+      border: 1px solid #1f1f1f;
+      border-radius: 8px;
+      padding: 12px;
+
+      h4 {
+        margin: 0;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      p {
+        margin-top: 8px;
+        font-size: 24px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .trade-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      background: #0052cc;
+
+      th {
+        padding: 10px;
+        font-size: 12px;
+        text-align: center;
+        color: #fff;
+      }
+    }
+
+    tbody {
+      tr {
+        background: #000;
+      }
+
+      td {
+        padding: 12px;
+        text-align: center;
+        border-top: 1px solid #1a1a1a;
+      }
+
+      .empty-row {
+        td {
+          height: 350px;
+          font-size: 20px;
+          font-weight: 600;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+}

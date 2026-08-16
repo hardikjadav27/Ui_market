@@ -1,0 +1,159 @@
+.wallet-page {
+  padding: 10px;
+  background: #000;
+  color: #fff;
+  min-height: 100vh;
+  font-size: 12px;
+}
+
+.wallet-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.wallet-left {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wallet-tabs {
+  display: flex;
+  gap: 8px;
+
+  button {
+    background: #000;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+
+    &.active {
+      background: #0d47a1;
+      border-color: #0d47a1;
+    }
+  }
+}
+
+.wallet-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.records {
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-weight: 700;
+}
+
+.total {
+  background: #2e7d32;
+  color: #fff;
+  border-radius: 6px;
+  padding: 3px 12px;
+  font-weight: 700;
+}
+
+.wallet-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  select,
+  input {
+    background: #111827;
+    color: #fff;
+    border: 1px solid #222;
+    border-radius: 20px;
+    padding: 8px 14px;
+    min-width: 180px;
+    outline: none;
+  }
+}
+
+.filter-btn {
+  background: #0057d9;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.wallet-search {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+
+  input {
+    width: 220px;
+    background: #111827;
+    color: white;
+    border: 1px solid #222;
+    border-radius: 4px;
+    padding: 6px 10px;
+  }
+}
+
+.wallet-table {
+  overflow-x: auto;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead {
+    background: #0047ab;
+
+    th {
+      padding: 6px;
+      text-align: center;
+      font-size: 11px;
+      color: white;
+      white-space: nowrap;
+    }
+  }
+
+  tbody td {
+    padding: 0;
+    text-align: center;
+  }
+}
+
+.empty-state {
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    margin: 0;
+    font-size: 34px;
+    font-weight: 700;
+  }
+
+  p {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+
+.wallet-error {
+  color: #f87171;
+  margin: 8px 0;
+}
+
+.wallet-table tbody td {
+  padding: 8px;
+}

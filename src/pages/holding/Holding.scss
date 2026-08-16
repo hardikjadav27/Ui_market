@@ -1,0 +1,163 @@
+.holding-page {
+  background: #000;
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* Header */
+.holding-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 12px 9px 13px;
+}
+
+.records {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.search-section {
+  input {
+    width: 150px;
+    height: 30px;
+    border-radius: 20px;
+    border: 1px solid #1d2940;
+    background: #10141c;
+    color: #fff;
+    padding: 0 12px;
+    outline: none;
+
+    &::placeholder {
+      color: #999;
+    }
+  }
+}
+
+/* Summary Cards */
+.holding-summary {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 12px 12px;
+}
+
+.pl-card {
+  width: 90px;
+  height: 60px;
+  border: 1px solid #1d2940;
+  border-radius: 4px;
+  background: #050505;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .title {
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .value {
+    color: #00ff4c;
+    font-size: 20px;
+    font-weight: 700;
+  }
+}
+
+.exchange-card {
+  width: 95px;
+  height: 60px;
+  border: 1px solid #1d2940;
+  border-radius: 4px;
+  background: #050505;
+  padding: 4px 6px;
+  box-sizing: border-box;
+}
+
+.buy-row,
+.sell-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.buy-row {
+  color: #00ff4c;
+}
+
+.sell-row {
+  color: #ff2b2b;
+}
+
+.exchange-name {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  margin: 6px 0;
+  color: #fff;
+}
+
+/* Table */
+.holding-table-wrapper {
+  width: 100%;
+}
+
+.holding-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    background: #0057d9;
+
+    th {
+      padding: 8px;
+      text-align: center;
+      font-size: 11px;
+      color: #fff;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+  }
+
+  tbody {
+    td {
+      color: #fff;
+      text-align: center;
+      border-top: 1px solid #111;
+    }
+  }
+}
+
+.empty-row {
+  height: 500px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    margin-bottom: 8px;
+    font-size: 20px;
+  }
+
+  p {
+    color: #fff;
+    font-size: 14px;
+  }
+}
+
+.holding-table {
+  .profit {
+    color: #00d54f;
+  }
+
+  .loss {
+    color: #ff1e1e;
+  }
+}

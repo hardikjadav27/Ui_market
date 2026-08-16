@@ -1,0 +1,98 @@
+.user-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+}
+
+.user-modal {
+  width: 96%;
+  height: 88vh;
+  margin: 20px auto;
+  background: #050505;
+  border-radius: 18px;
+  padding: 15px;
+}
+
+.modal-top-menu {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+
+  button {
+    background: #000;
+    border: 1px solid #222;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 12px;
+  }
+
+  .active {
+    background: #0057d9;
+  }
+
+  .close-btn {
+    margin-left: auto;
+    background: #ff2020;
+  }
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px;
+}
+
+.panel {
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.field {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #111;
+}
+
+.button-group,
+.exchange-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.green {
+  background: #45a92d;
+}
+
+.red {
+  background: #ff2020;
+}
+
+.setting-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 90px;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.exchange-card {
+  padding: 15px 0;
+  border-bottom: 1px solid #111;
+}
+
+.exchange-header,
+.exchange-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.exchange-actions button {
+  background: #45a92d;
+  border: none;
+  color: white;
+  padding: 6px 16px;
+}

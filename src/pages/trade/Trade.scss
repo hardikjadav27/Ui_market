@@ -1,0 +1,174 @@
+.trade-header {
+  margin-bottom: 10px;
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-side {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.records-box {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #1d2433;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 12px;
+}
+
+.search-box {
+  width: 140px;
+  height: 32px;
+  background: #050505;
+  border: 1px solid #1d2433;
+  border-radius: 18px;
+  padding: 0 12px;
+  color: #fff;
+}
+
+.right-side {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  select {
+    width: 150px;
+    height: 34px;
+    background: #151822;
+    border: none;
+    border-radius: 20px;
+    color: #fff;
+    padding: 0 12px;
+  }
+}
+
+.clear-btn {
+  height: 34px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 18px;
+  background: #ff1e1e;
+  color: #fff;
+  font-weight: 700;
+}
+
+.reload-btn {
+  height: 34px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 18px;
+  background: #0057d9;
+  color: #fff;
+  font-weight: 700;
+}
+
+.bottom-row {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pl-section {
+  display: flex;
+  gap: 10px;
+}
+
+.info-card,
+.summary-card {
+  border: 1px solid #1d2433;
+  border-radius: 8px;
+  background: #050505;
+  padding: 8px 12px;
+  min-width: 90px;
+
+  span {
+    display: block;
+    font-size: 9px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  strong {
+    font-size: 18px;
+    color: #0078ff;
+  }
+}
+
+.summary-section {
+  display: flex;
+  gap: 10px;
+}
+
+.summary-card {
+  min-width: 90px;
+
+  strong {
+    color: #00d54f;
+    font-size: 16px;
+  }
+}
+
+.trade-table-wrapper {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.trade-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #000;
+
+  thead {
+    background: #0057d9;
+
+    th {
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 5px;
+      text-align: center;
+      white-space: nowrap;
+    }
+  }
+
+  tbody {
+    td {
+      color: #fff;
+      text-align: center;
+      border-bottom: 1px solid #111;
+      font-size: 11px;
+    }
+  }
+}
+
+.empty-table {
+  height: 450px;
+  vertical-align: middle;
+}
+
+.empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h2 {
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: #fff;
+    font-size: 16px;
+  }
+}

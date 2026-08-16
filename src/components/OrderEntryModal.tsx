@@ -1,0 +1,239 @@
+import { FormEvent, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useMarket } from "../context/MarketContext";
+import { createOrder } from "../services/tradingApi";
+import type { CreateOrderRequest } from "../types/trading";
+import "./OrderEntryModal.scss";
+
+interface OrderEntryModalProps {
+  open: boolean;
+  symbol: string;
+  exchange: string;
+  instrumentType: string;
+  side: "BUY" | "SELL";
+  onClose: () => void;
+}
+
+function OrderEntryModal({
+  open,
+  symbol,
+  exchange,
+  instrumentType,
+  side,
+  onClose,
+}: OrderEntryModalProps) {
+  const { getTick, reloadTradingData, subscribe, unsubscribe } = useMarket();
+  const tick = getTick(symbol, exchange);
+
+  const [orderSide, setOrderSide] = useState<"BUY" | "SELL">(side);
+  
+  useEffect(() => {
+    setOrderSide(side);
+  }, [side]);
+
+  const [orderType, setOrderType] = useState("LIMIT");
+  const [quantity, setQuantity] = useState<string | number>(1);
+  const [price, setPrice] = useState<string | number>(0);
+  const [triggerPrice, setTriggerPrice] = useState<string | number>(0);
+  const [stopLoss, setStopLoss] = useState<string | number>(0);
+  const [loading, setLoading] = useState(false);
+
+  const handleNumericChange = (value: string, setter: (val: string | number) => void) => {
+    const sanitized = value.replace(/[^0-9.]/g, "");
+    const parts = sanitized.split(".");
+    const finalValue = parts[0] + (parts.length > 1 ? "." + parts.slice(1).join("") : "");
+    setter(finalValue);
+  };
+
+  useEffect(() => {
+    if (open) {
+      void subscribe(symbol, exchange, instrumentType);
+    }
+    return () => {
+      if (open) {
+        void unsubscribe(symbol, exchange, instrumentType);
+      }
+    };
+  }, [open, symbol, exchange, instrumentType, subscribe, unsubscribe]);
+
+  useEffect(() => {
+    if (tick?.ltp) {
+      setPrice(tick.ltp);
+    }
+  }, [tick?.ltp]);
+
+  if (!open) return null;
+
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    setLoading(true);
+    const ltp = tick?.ltp ?? 0;
+    const numPrice = orderType === "SL-M" ? 0 : Number(price);
+    const numTrigger = (orderType === "SL" || orderType === "SL-M") ? Number(triggerPrice) : 0;
+    // Target is hidden based on instructions, but Stop Loss is shown for SL and SL-M
+    const numTarget = 0; 
+    const numSL = (orderType === "SL" || orderType === "SL-M") ? Number(stopLoss) : 0;
+
+    // Standard Market Validations
+    if (orderType === "SL" || orderType === "SL-M") {
+      if (numTrigger <= 0) {
+        toast.error("Trigger price must be greater than 0");
+        setLoading(false);
+        return;
+      }
+      if (ltp > 0) {
+        if (orderSide === "BUY" && numTrigger <= ltp) {
+          toast.error(`For BUY ${orderType}, Trigger Price (${numTrigger}) must be greater than LTP (${ltp})`);
+          setLoading(false);
+          return;
+        }
+        if (orderSide === "SELL" && numTrigger >= ltp) {
+          toast.error(`For SELL ${orderType}, Trigger Price (${numTrigger}) must be less than LTP (${ltp})`);
+          setLoading(false);
+          return;
+        }
+      }
+    }
+
+    if (orderType === "SL") {
+      if (orderSide === "BUY" && numPrice < numTrigger) {
+        toast.error("For BUY SL, Limit Price must be greater than or equal to Trigger Price");
+        setLoading(false);
+        return;
+      }
+      if (orderSide === "SELL" && numPrice > numTrigger) {
+        toast.error("For SELL SL, Limit Price must be less than or equal to Trigger Price");
+        setLoading(false);
+        return;
+      }
+    }
+
+    try {
+      const payload: CreateOrderRequest = {
+        symbol,
+        exchange,
+        orderPlaceType: "Entry",
+        transactionType: orderSide,
+        orderType,
+        instrumentType,
+        quantity: Number(quantity),
+        price: orderType === "MARKET" ? ltp : orderType === "SL-M" ? 0 : numPrice,
+        triggerPrice: numTrigger,
+        stopLoss: numSL,
+        target: numTarget,
+        trailStopLoss: 0,
+      };
+      await createOrder(payload);
+      toast.success(`${orderSide} order placed for ${symbol}`);
+      await reloadTradingData();
+      onClose();
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Order failed");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="order-modal-overlay" onClick={onClose}>
+      <div className="order-modal-card" onClick={(e) => e.stopPropagation()}>
+        <div className="order-modal-header">
+          <h3>
+            {orderSide} {symbol}
+          </h3>
+          <div className="side-toggle" style={{ display: 'flex', gap: '5px', marginLeft: 'auto', marginRight: '15px' }}>
+            <button 
+              type="button" 
+              onClick={() => setOrderSide("BUY")} 
+              style={{ padding: '4px 12px', cursor: 'pointer', backgroundColor: orderSide === 'BUY' ? '#4CAF50' : '#333', color: '#fff', border: 'none', borderRadius: '4px', fontWeight: 'bold' }}
+            >
+              BUY
+            </button>
+            <button 
+              type="button" 
+              onClick={() => setOrderSide("SELL")} 
+              style={{ padding: '4px 12px', cursor: 'pointer', backgroundColor: orderSide === 'SELL' ? '#f44336' : '#333', color: '#fff', border: 'none', borderRadius: '4px', fontWeight: 'bold' }}
+            >
+              SELL
+            </button>
+          </div>
+          <button type="button" className="close-btn" onClick={onClose}>
+            ×
+          </button>
+        </div>
+
+        <div className="order-modal-meta">
+          <span>{exchange}</span>
+          <span className="ltp">LTP: {tick?.ltp ?? "—"}</span>
+        </div>
+
+        <form onSubmit={handleSubmit}>
+          <div className="form-grid">
+            <label>
+              Order Type
+              <select value={orderType} onChange={(e) => setOrderType(e.target.value)}>
+                <option value="MARKET">MARKET</option>
+                <option value="LIMIT">LIMIT</option>
+                <option value="SL">SL</option>
+                <option value="SL-M">SL-M</option>
+              </select>
+            </label>
+
+            <label>
+              Quantity
+              <input
+                type="text"
+                value={quantity}
+                onChange={(e) => handleNumericChange(e.target.value, setQuantity)}
+              />
+            </label>
+
+            <label>
+              Price
+              <input
+                type="text"
+                value={price}
+                onChange={(e) => handleNumericChange(e.target.value, setPrice)}
+                disabled={orderType === "MARKET" || orderType === "SL-M"}
+                style={{
+                  backgroundColor: (orderType === "MARKET" || orderType === "SL-M") ? "#2a2a2a" : undefined,
+                  color: (orderType === "MARKET" || orderType === "SL-M") ? "#888" : undefined,
+                  cursor: (orderType === "MARKET" || orderType === "SL-M") ? "not-allowed" : undefined,
+                  opacity: (orderType === "MARKET" || orderType === "SL-M") ? 0.6 : 1
+                }}
+              />
+            </label>
+
+            {(orderType === "SL" || orderType === "SL-M") && (
+              <>
+                <label>
+                  Trigger Price
+                  <input
+                    type="text"
+                    value={triggerPrice}
+                    onChange={(e) => handleNumericChange(e.target.value, setTriggerPrice)}
+                  />
+                </label>
+
+                <label>
+                  Stop Loss
+                  <input
+                    type="text"
+                    value={stopLoss}
+                    onChange={(e) => handleNumericChange(e.target.value, setStopLoss)}
+                  />
+                </label>
+              </>
+            )}
+          </div>
+
+          <button type="submit" className="submit-btn" disabled={loading} style={{ backgroundColor: orderSide === 'BUY' ? '#2196F3' : '#f44336' }}>
+            {loading ? "Placing..." : `Place ${orderSide} Order`}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+export default OrderEntryModal;
