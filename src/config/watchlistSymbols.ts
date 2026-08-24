@@ -47,41 +47,52 @@ export const unsupportedWatchlistTabs: WatchlistTab[] = [
   "OTHERS",
 ];
 
-export const watchlistInstruments: Record<WatchlistTab, WatchlistInstrument[]> = {
-  WATCHLIST: [
-    { symbol: "RELIANCE", exchange: "NSE", instrumentType: "EQ" },
-    { symbol: "TCS", exchange: "NSE", instrumentType: "EQ" },
-    { symbol: "INFY", exchange: "NSE", instrumentType: "EQ" },
-    { symbol: "HDFCBANK", exchange: "NSE", instrumentType: "EQ" },
-    { symbol: "ICICIBANK", exchange: "NSE", instrumentType: "EQ" },
-    { symbol: "SBIN", exchange: "NSE", instrumentType: "EQ" },
-    { symbol: "ITC", exchange: "NSE", instrumentType: "EQ" },
-    { symbol: "BHARTIARTL", exchange: "NSE", instrumentType: "EQ" },
-  ],
-  "NSE-FUTURE": [
-    { symbol: "NIFTY", exchange: "NFO", instrumentType: "FUT", label: "NIFTY FUT" },
-    { symbol: "BANKNIFTY", exchange: "NFO", instrumentType: "FUT", label: "BANKNIFTY FUT" },
-    { symbol: "RELIANCE", exchange: "NFO", instrumentType: "FUT" },
-    { symbol: "TCS", exchange: "NFO", instrumentType: "FUT" },
-    { symbol: "INFY", exchange: "NFO", instrumentType: "FUT" },
-    { symbol: "HDFCBANK", exchange: "NFO", instrumentType: "FUT" },
-  ],
-  "NSE-OPTIONS": [],
-  "MCX-FUTURE": [
-    { symbol: "GOLD", exchange: "MCX", instrumentType: "FUT" },
-    { symbol: "SILVER", exchange: "MCX", instrumentType: "FUT" },
-    { symbol: "CRUDEOIL", exchange: "MCX", instrumentType: "FUT" },
-    { symbol: "NATURALGAS", exchange: "MCX", instrumentType: "FUT" },
-  ],
-  "MCX-OPTIONS": [],
-  COMEX: [],
-  CRYPTO: [],
-  FOREX: [],
-  "US-STOCK": [],
-  SGX: [],
-  OTHERS: [],
-  DGCX: [],
-};
+export const watchlistInstruments: Record<WatchlistTab, WatchlistInstrument[]> =
+  {
+    WATCHLIST: [
+      { symbol: "RELIANCE", exchange: "NSE", instrumentType: "EQ" },
+      { symbol: "TCS", exchange: "NSE", instrumentType: "EQ" },
+      { symbol: "INFY", exchange: "NSE", instrumentType: "EQ" },
+      { symbol: "HDFCBANK", exchange: "NSE", instrumentType: "EQ" },
+      { symbol: "ICICIBANK", exchange: "NSE", instrumentType: "EQ" },
+      { symbol: "SBIN", exchange: "NSE", instrumentType: "EQ" },
+      { symbol: "ITC", exchange: "NSE", instrumentType: "EQ" },
+      { symbol: "BHARTIARTL", exchange: "NSE", instrumentType: "EQ" },
+    ],
+    "NSE-FUTURE": [
+      {
+        symbol: "NIFTY",
+        exchange: "NFO",
+        instrumentType: "FUT",
+        label: "NIFTY FUT",
+      },
+      {
+        symbol: "BANKNIFTY",
+        exchange: "NFO",
+        instrumentType: "FUT",
+        label: "BANKNIFTY FUT",
+      },
+      { symbol: "RELIANCE", exchange: "NFO", instrumentType: "FUT" },
+      { symbol: "TCS", exchange: "NFO", instrumentType: "FUT" },
+      { symbol: "INFY", exchange: "NFO", instrumentType: "FUT" },
+      { symbol: "HDFCBANK", exchange: "NFO", instrumentType: "FUT" },
+    ],
+    "NSE-OPTIONS": [],
+    "MCX-FUTURE": [
+      { symbol: "GOLD", exchange: "MCX", instrumentType: "FUT" },
+      { symbol: "SILVER", exchange: "MCX", instrumentType: "FUT" },
+      { symbol: "CRUDEOIL", exchange: "MCX", instrumentType: "FUT" },
+      { symbol: "NATURALGAS", exchange: "MCX", instrumentType: "FUT" },
+    ],
+    "MCX-OPTIONS": [],
+    COMEX: [],
+    CRYPTO: [],
+    FOREX: [],
+    "US-STOCK": [],
+    SGX: [],
+    OTHERS: [],
+    DGCX: [],
+  };
 
 export function getWatchlistEmptyMessage(tab: WatchlistTab): string {
   if (unsupportedWatchlistTabs.includes(tab)) {
@@ -91,8 +102,23 @@ export function getWatchlistEmptyMessage(tab: WatchlistTab): string {
 }
 
 export const homeIndexSymbols: WatchlistInstrument[] = [
-  { symbol: "NIFTY 50", exchange: "NSE", instrumentType: "INDEX", label: "NIFTY" },
-  { symbol: "BANKNIFTY", exchange: "NSE", instrumentType: "INDEX", label: "BANKNIFTY" },
-  { symbol: "RELIANCE", exchange: "NSE", instrumentType: "EQ", label: "RELIANCE" },
+  {
+    symbol: "NIFTY 50",
+    exchange: "NSE",
+    instrumentType: "INDEX",
+    label: "NIFTY",
+  },
+  {
+    symbol: "BANKNIFTY",
+    exchange: "NSE",
+    instrumentType: "INDEX",
+    label: "BANKNIFTY",
+  },
+  {
+    symbol: "RELIANCE",
+    exchange: "NSE",
+    instrumentType: "EQ",
+    label: "RELIANCE",
+  },
   { symbol: "TCS", exchange: "NSE", instrumentType: "EQ", label: "TCS" },
 ];

@@ -1,13 +1,18 @@
 .trading-alert-banner {
-  margin: 0 10px 10px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid #7f1d1d;
-  background: rgba(127, 29, 29, 0.35);
-  color: #fca5a5;
-  font-size: 12px;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-left: 4px solid #ef4444;
+  border-radius: 6px;
+}
 
-  p {
-    margin: 0;
-  }
+.trading-alert-banner p {
+  margin: 0;
+  color: #fca5a5;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
 }

@@ -1,160 +1,411 @@
 .watchlist-page {
-  min-height: 100vh;
-  background: #000;
-  color: #fff;
+  width: 100%;
+  min-width: 0;
+
+  color: #f8fafc;
 }
+
+/* =========================
+   TOP BAR
+========================= */
 
 .watchlist-top {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 12px;
+
   padding: 10px;
+
+  background: #111827;
+
+  border: 1px solid #263247;
+  border-radius: 7px;
+
+  box-sizing: border-box;
 }
+
+/* =========================
+   MARKET TABS
+========================= */
 
 .market-tabs {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+
   gap: 4px;
 
-  button {
-    background: #000;
-    color: #fff;
-    border: 1px solid #222;
-    border-radius: 4px;
-    padding: 4px 10px;
-    font-size: 10px;
-    font-weight: 700;
-    cursor: pointer;
+  overflow-x: auto;
 
-    &.active {
-      background: #0057d9;
-      border-color: #0057d9;
-    }
-  }
+  scrollbar-width: none;
 }
+
+.market-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.market-tabs button {
+  flex-shrink: 0;
+
+  padding: 8px 14px;
+
+  color: #94a3b8;
+  background: transparent;
+
+  border: 1px solid transparent;
+  border-radius: 5px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.market-tabs button:hover {
+  color: #ffffff;
+
+  background: #1e293b;
+}
+
+.market-tabs button.active {
+  color: #22c55e;
+
+  background: rgba(34, 197, 94, 0.08);
+
+  border-color: rgba(34, 197, 94, 0.25);
+}
+
+/* =========================
+   SEARCH
+========================= */
 
 .search-area {
   display: flex;
-  gap: 10px;
+  align-items: center;
 
-  select,
-  input {
-    background: #11141d;
-    border: none;
-    color: #fff;
-    height: 34px;
-    border-radius: 20px;
-    padding: 0 15px;
-    outline: none;
-  }
+  gap: 8px;
 
-  select {
-    width: 190px;
-  }
-
-  input {
-    width: 180px;
-  }
+  flex-shrink: 0;
 }
+
+.search-area input {
+  width: 250px;
+
+  padding: 9px 12px;
+
+  color: #f8fafc;
+  background: #0f172a;
+
+  border: 1px solid #334155;
+  border-radius: 5px;
+
+  outline: none;
+
+  font-size: 11px;
+
+  box-sizing: border-box;
+}
+
+.search-area input::placeholder {
+  color: #64748b;
+}
+
+.search-area input:focus {
+  border-color: #22c55e;
+
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.08);
+}
+
+/* =========================
+   FEED STATUS
+========================= */
+
+.feed-status {
+  padding: 7px 10px;
+
+  border-radius: 4px;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.4px;
+
+  white-space: nowrap;
+}
+
+.feed-status.online {
+  color: #22c55e;
+
+  background: rgba(34, 197, 94, 0.08);
+
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.feed-status.offline {
+  color: #ef4444;
+
+  background: rgba(239, 68, 68, 0.08);
+
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* =========================
+   TABLE
+========================= */
 
 .watchlist-table {
   width: 100%;
-  border-collapse: collapse;
 
-  thead {
-    background: #0057d9;
+  min-width: 1100px;
 
-    th {
-      padding: 5px;
-      font-size: 11px;
-      text-align: center;
-      color: #fff;
-    }
-  }
+  border-collapse: separate;
+  border-spacing: 0;
 
-  tbody {
-    tr {
-      border-bottom: 1px solid #111;
+  background: #111827;
 
-      &:hover {
-        background: #0a0a0a;
-      }
+  border: 1px solid #263247;
+  border-radius: 7px;
 
-      td {
-        padding: 4px;
-        text-align: center;
-        font-size: 11px;
-        font-weight: 600;
-      }
-    }
-  }
+  overflow: hidden;
 }
+
+.watchlist-table th {
+  height: 40px;
+
+  padding: 0 10px;
+
+  color: #64748b;
+  background: #172033;
+
+  border-bottom: 1px solid #263247;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  text-align: center;
+
+  white-space: nowrap;
+}
+
+.watchlist-table td {
+  height: 42px;
+
+  padding: 4px 8px;
+
+  color: #cbd5e1;
+
+  border-bottom: 1px solid #1e293b;
+
+  font-size: 11px;
+
+  text-align: center;
+
+  white-space: nowrap;
+}
+
+.watchlist-table tbody tr:hover {
+  background: #172033;
+}
+
+.watchlist-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* =========================
+   SYMBOL
+========================= */
+
+.watchlist-table td:nth-child(1) {
+  color: #94a3b8;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.watchlist-table td:nth-child(2) {
+  color: #f8fafc;
+
+  font-weight: 700;
+
+  text-align: left;
+}
+
+/* =========================
+   PRICE BOX
+========================= */
 
 .price-box {
-  width: 100%;
-  height: 18px;
-  background: #050505;
-  border: 1px solid #1a1a1a;
-  border-radius: 6px;
+  min-width: 75px;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 6px 8px;
 
-  font-size: 11px;
+  box-sizing: border-box;
 
-  &.buy {
-    border-color: #0057d9;
-    color: #fff;
-    cursor: pointer;
-  }
+  border-radius: 4px;
 
-  &.sell {
-    border-color: #ff1e1e;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  &.ltp.up,
-  &.up {
-    color: #00d54f;
-  }
-
-  &.ltp.down,
-  &.down {
-    color: #ff1e1e;
-  }
-}
-
-.feed-status {
-  height: 34px;
-  padding: 0 12px;
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
   font-size: 11px;
   font-weight: 700;
-  border: 1px solid #1d2433;
 
-  &.online {
-    color: #00d54f;
+  text-align: center;
+
+  line-height: 1.2;
+}
+
+/* BUY */
+
+button.price-box.buy {
+  color: #22c55e;
+
+  background: rgba(34, 197, 94, 0.08);
+
+  border: 1px solid rgba(34, 197, 94, 0.2);
+
+  cursor: pointer;
+
+  transition: all 0.15s ease;
+}
+
+button.price-box.buy:hover {
+  color: #ffffff;
+
+  background: #16a34a;
+
+  border-color: #16a34a;
+}
+
+/* SELL */
+
+button.price-box.sell {
+  color: #ef4444;
+
+  background: rgba(239, 68, 68, 0.08);
+
+  border: 1px solid rgba(239, 68, 68, 0.2);
+
+  cursor: pointer;
+
+  transition: all 0.15s ease;
+}
+
+button.price-box.sell:hover {
+  color: #ffffff;
+
+  background: #dc2626;
+
+  border-color: #dc2626;
+}
+
+/* LTP */
+
+.price-box.ltp {
+  display: inline-block;
+
+  border: 1px solid transparent;
+}
+
+.price-box.up {
+  color: #22c55e;
+
+  background: rgba(34, 197, 94, 0.08);
+
+  border-color: rgba(34, 197, 94, 0.15);
+}
+
+.price-box.down {
+  color: #ef4444;
+
+  background: rgba(239, 68, 68, 0.08);
+
+  border-color: rgba(239, 68, 68, 0.15);
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.watchlist-table .empty-row td {
+  height: 250px;
+
+  padding: 30px;
+
+  text-align: center;
+}
+
+.empty-row h2 {
+  margin: 0 0 8px;
+
+  color: #cbd5e1;
+
+  font-size: 18px;
+}
+
+.empty-row p {
+  max-width: 500px;
+
+  margin: 0 auto;
+
+  color: #64748b;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+  .watchlist-top {
+    align-items: stretch;
+
+    flex-direction: column;
   }
 
-  &.offline {
-    color: #ff1e1e;
+  .market-tabs {
+    width: 100%;
+  }
+
+  .search-area {
+    width: 100%;
+  }
+
+  .search-area input {
+    flex: 1;
+
+    width: auto;
   }
 }
 
-.empty-row td {
-  height: 500px;
-  text-align: center;
-  vertical-align: middle;
-
-  h2 {
-    margin: 0;
+@media (max-width: 600px) {
+  .watchlist-page {
+    overflow-x: hidden;
   }
 
-  p {
-    margin-top: 10px;
+  .watchlist-top {
+    padding: 8px;
+  }
+
+  .search-area {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  .search-area input {
+    width: 100%;
+  }
+
+  .feed-status {
+    width: fit-content;
+  }
+
+  .watchlist-table {
+    min-width: 1100px;
   }
 }

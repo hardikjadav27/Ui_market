@@ -26,7 +26,7 @@ function OrderEntryModal({
   const tick = getTick(symbol, exchange);
 
   const [orderSide, setOrderSide] = useState<"BUY" | "SELL">(side);
-  
+
   useEffect(() => {
     setOrderSide(side);
   }, [side]);
@@ -38,10 +38,14 @@ function OrderEntryModal({
   const [stopLoss, setStopLoss] = useState<string | number>(0);
   const [loading, setLoading] = useState(false);
 
-  const handleNumericChange = (value: string, setter: (val: string | number) => void) => {
+  const handleNumericChange = (
+    value: string,
+    setter: (val: string | number) => void,
+  ) => {
     const sanitized = value.replace(/[^0-9.]/g, "");
     const parts = sanitized.split(".");
-    const finalValue = parts[0] + (parts.length > 1 ? "." + parts.slice(1).join("") : "");
+    const finalValue =
+      parts[0] + (parts.length > 1 ? "." + parts.slice(1).join("") : "");
     setter(finalValue);
   };
 
@@ -69,10 +73,12 @@ function OrderEntryModal({
     setLoading(true);
     const ltp = tick?.ltp ?? 0;
     const numPrice = orderType === "SL-M" ? 0 : Number(price);
-    const numTrigger = (orderType === "SL" || orderType === "SL-M") ? Number(triggerPrice) : 0;
+    const numTrigger =
+      orderType === "SL" || orderType === "SL-M" ? Number(triggerPrice) : 0;
     // Target is hidden based on instructions, but Stop Loss is shown for SL and SL-M
-    const numTarget = 0; 
-    const numSL = (orderType === "SL" || orderType === "SL-M") ? Number(stopLoss) : 0;
+    const numTarget = 0;
+    const numSL =
+      orderType === "SL" || orderType === "SL-M" ? Number(stopLoss) : 0;
 
     // Standard Market Validations
     if (orderType === "SL" || orderType === "SL-M") {
@@ -83,12 +89,16 @@ function OrderEntryModal({
       }
       if (ltp > 0) {
         if (orderSide === "BUY" && numTrigger <= ltp) {
-          toast.error(`For BUY ${orderType}, Trigger Price (${numTrigger}) must be greater than LTP (${ltp})`);
+          toast.error(
+            `For BUY ${orderType}, Trigger Price (${numTrigger}) must be greater than LTP (${ltp})`,
+          );
           setLoading(false);
           return;
         }
         if (orderSide === "SELL" && numTrigger >= ltp) {
-          toast.error(`For SELL ${orderType}, Trigger Price (${numTrigger}) must be less than LTP (${ltp})`);
+          toast.error(
+            `For SELL ${orderType}, Trigger Price (${numTrigger}) must be less than LTP (${ltp})`,
+          );
           setLoading(false);
           return;
         }
@@ -97,12 +107,16 @@ function OrderEntryModal({
 
     if (orderType === "SL") {
       if (orderSide === "BUY" && numPrice < numTrigger) {
-        toast.error("For BUY SL, Limit Price must be greater than or equal to Trigger Price");
+        toast.error(
+          "For BUY SL, Limit Price must be greater than or equal to Trigger Price",
+        );
         setLoading(false);
         return;
       }
       if (orderSide === "SELL" && numPrice > numTrigger) {
-        toast.error("For SELL SL, Limit Price must be less than or equal to Trigger Price");
+        toast.error(
+          "For SELL SL, Limit Price must be less than or equal to Trigger Price",
+        );
         setLoading(false);
         return;
       }
@@ -117,7 +131,8 @@ function OrderEntryModal({
         orderType,
         instrumentType,
         quantity: Number(quantity),
-        price: orderType === "MARKET" ? ltp : orderType === "SL-M" ? 0 : numPrice,
+        price:
+          orderType === "MARKET" ? ltp : orderType === "SL-M" ? 0 : numPrice,
         triggerPrice: numTrigger,
         stopLoss: numSL,
         target: numTarget,
@@ -141,18 +156,44 @@ function OrderEntryModal({
           <h3>
             {orderSide} {symbol}
           </h3>
-          <div className="side-toggle" style={{ display: 'flex', gap: '5px', marginLeft: 'auto', marginRight: '15px' }}>
-            <button 
-              type="button" 
-              onClick={() => setOrderSide("BUY")} 
-              style={{ padding: '4px 12px', cursor: 'pointer', backgroundColor: orderSide === 'BUY' ? '#4CAF50' : '#333', color: '#fff', border: 'none', borderRadius: '4px', fontWeight: 'bold' }}
+          <div
+            className="side-toggle"
+            // style={{
+            //   display: "flex",
+            //   gap: "5px",
+            //   marginLeft: "auto",
+            //   marginRight: "15px",
+            // }}
+          >
+            <button
+              type="button"
+              onClick={() => setOrderSide("BUY")}
+              // style={{
+              //   padding: "4px 12px",
+              //   cursor: "pointer",
+              //   backgroundColor: orderSide === "BUY" ? "#4CAF50" : "#333",
+              //   color: "#fff",
+              //   border: "none",
+              //   borderRadius: "4px",
+              //   fontWeight: "bold",
+              // }}
+              className={orderSide === "BUY" ? "buy-active" : ""}
             >
               BUY
             </button>
-            <button 
-              type="button" 
-              onClick={() => setOrderSide("SELL")} 
-              style={{ padding: '4px 12px', cursor: 'pointer', backgroundColor: orderSide === 'SELL' ? '#f44336' : '#333', color: '#fff', border: 'none', borderRadius: '4px', fontWeight: 'bold' }}
+            <button
+              type="button"
+              onClick={() => setOrderSide("SELL")}
+              // style={{
+              //   padding: "4px 12px",
+              //   cursor: "pointer",
+              //   backgroundColor: orderSide === "SELL" ? "#f44336" : "#333",
+              //   color: "#fff",
+              //   border: "none",
+              //   borderRadius: "4px",
+              //   fontWeight: "bold",
+              // }}
+              className={orderSide === "SELL" ? "sell-active" : ""}
             >
               SELL
             </button>
@@ -171,7 +212,10 @@ function OrderEntryModal({
           <div className="form-grid">
             <label>
               Order Type
-              <select value={orderType} onChange={(e) => setOrderType(e.target.value)}>
+              <select
+                value={orderType}
+                onChange={(e) => setOrderType(e.target.value)}
+              >
                 <option value="MARKET">MARKET</option>
                 <option value="LIMIT">LIMIT</option>
                 <option value="SL">SL</option>
@@ -184,7 +228,9 @@ function OrderEntryModal({
               <input
                 type="text"
                 value={quantity}
-                onChange={(e) => handleNumericChange(e.target.value, setQuantity)}
+                onChange={(e) =>
+                  handleNumericChange(e.target.value, setQuantity)
+                }
               />
             </label>
 
@@ -195,12 +241,22 @@ function OrderEntryModal({
                 value={price}
                 onChange={(e) => handleNumericChange(e.target.value, setPrice)}
                 disabled={orderType === "MARKET" || orderType === "SL-M"}
-                style={{
-                  backgroundColor: (orderType === "MARKET" || orderType === "SL-M") ? "#2a2a2a" : undefined,
-                  color: (orderType === "MARKET" || orderType === "SL-M") ? "#888" : undefined,
-                  cursor: (orderType === "MARKET" || orderType === "SL-M") ? "not-allowed" : undefined,
-                  opacity: (orderType === "MARKET" || orderType === "SL-M") ? 0.6 : 1
-                }}
+                // style={{
+                //   backgroundColor:
+                //     orderType === "MARKET" || orderType === "SL-M"
+                //       ? "#2a2a2a"
+                //       : undefined,
+                //   color:
+                //     orderType === "MARKET" || orderType === "SL-M"
+                //       ? "#888"
+                //       : undefined,
+                //   cursor:
+                //     orderType === "MARKET" || orderType === "SL-M"
+                //       ? "not-allowed"
+                //       : undefined,
+                //   opacity:
+                //     orderType === "MARKET" || orderType === "SL-M" ? 0.6 : 1,
+                // }}
               />
             </label>
 
@@ -211,7 +267,9 @@ function OrderEntryModal({
                   <input
                     type="text"
                     value={triggerPrice}
-                    onChange={(e) => handleNumericChange(e.target.value, setTriggerPrice)}
+                    onChange={(e) =>
+                      handleNumericChange(e.target.value, setTriggerPrice)
+                    }
                   />
                 </label>
 
@@ -220,14 +278,23 @@ function OrderEntryModal({
                   <input
                     type="text"
                     value={stopLoss}
-                    onChange={(e) => handleNumericChange(e.target.value, setStopLoss)}
+                    onChange={(e) =>
+                      handleNumericChange(e.target.value, setStopLoss)
+                    }
                   />
                 </label>
               </>
             )}
           </div>
 
-          <button type="submit" className="submit-btn" disabled={loading} style={{ backgroundColor: orderSide === 'BUY' ? '#2196F3' : '#f44336' }}>
+          <button
+            type="submit"
+            className={`submit-btn ${orderSide === "BUY" ? "buy" : "sell"}`}
+            disabled={loading}
+            // style={{
+            //   backgroundColor: orderSide === "BUY" ? "#2196F3" : "#f44336",
+            // }}
+          >
             {loading ? "Placing..." : `Place ${orderSide} Order`}
           </button>
         </form>

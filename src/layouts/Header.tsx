@@ -47,16 +47,17 @@
 
 import { NavLink } from "react-router-dom";
 import { getLoggedInRoleId } from "../utils/roles";
+import "./header.scss";
 
 function Header() {
   const role = localStorage.getItem("role");
   const fullName = localStorage.getItem("fullName");
   const roleId = getLoggedInRoleId();
 
-  const isSuperAdmin = roleId === 1;
-  const isAdmin = roleId === 2;
-  const isSubAdmin = roleId === 3;
-  const isMaster = roleId === 4;
+  // const isSuperAdmin = roleId === 1;
+  // const isAdmin = roleId === 2;
+  // const isSubAdmin = roleId === 3;
+  // const isMaster = roleId === 4;
   const isClient = roleId === 5;
 
   return (
@@ -84,41 +85,41 @@ function Header() {
         {/* SUPER ADMIN */}
         {/* ========================= */}
 
-        {isSuperAdmin && <NavLink to="/dashboard/super">Super Admin</NavLink>}
+        {/* {isSuperAdmin && <NavLink to="/dashboard/super">Super Admin</NavLink>} */}
 
         {/* ========================= */}
         {/* ADMIN */}
         {/* Only SuperAdmin can manage Admin */}
         {/* ========================= */}
 
-        {isSuperAdmin && <NavLink to="/dashboard/admin">Admin</NavLink>}
+        {/* {isSuperAdmin && <NavLink to="/dashboard/admin">Admin</NavLink>} */}
 
         {/* ========================= */}
         {/* SUB ADMIN */}
         {/* SuperAdmin and Admin */}
         {/* ========================= */}
 
-        {(isSuperAdmin || isAdmin) && (
+        {/* {(isSuperAdmin || isAdmin) && (
           <NavLink to="/dashboard/sub-admin">Sub Admin</NavLink>
-        )}
+        )} */}
 
         {/* ========================= */}
         {/* MASTER */}
         {/* SuperAdmin, Admin, SubAdmin */}
         {/* ========================= */}
 
-        {(isSuperAdmin || isAdmin || isSubAdmin) && (
+        {/* {(isSuperAdmin || isAdmin || isSubAdmin) && (
           <NavLink to="/dashboard/master">Master</NavLink>
-        )}
+        )} */}
 
         {/* ========================= */}
         {/* CLIENT MANAGEMENT */}
         {/* ========================= */}
         {/* Client role itself will NOT see this menu */}
 
-        {(isSuperAdmin || isAdmin || isSubAdmin || isMaster) && (
+        {/* {(isSuperAdmin || isAdmin || isSubAdmin || isMaster) && (
           <NavLink to="/dashboard/client">Client</NavLink>
-        )}
+        )} */}
 
         {/* ========================= */}
         {/* TRADING MENUS */}

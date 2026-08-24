@@ -3,6 +3,7 @@ import { useAppDispatch } from "../store";
 import { logout } from "../store/login/login.reducer";
 import { useMarket } from "../context/MarketContext";
 import { formatPrice, tickKey } from "../types/trading";
+import "./footer.scss";
 
 function Footer() {
   const dispatch = useAppDispatch();

@@ -1,129 +1,272 @@
 .home-container {
-  min-height: 100vh;
-  background: #000;
-  color: #fff;
-  padding: 15px;
+  width: 100%;
+}
 
+/* =========================
+   SUMMARY CARDS
+========================= */
+
+.summary-cards {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 16px;
+
+  margin-bottom: 20px;
+}
+
+.card {
+  min-height: 130px;
+
+  padding: 20px;
+
+  background: #111827;
+
+  border: 1px solid #273449;
+  border-radius: 10px;
+
+  box-sizing: border-box;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card h3 {
+  margin: 0 0 15px;
+
+  color: #94a3b8;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 0.8px;
+}
+
+.card h1 {
+  margin: 0;
+
+  color: #f8fafc;
+
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.broker-card {
+  min-height: 180px;
+}
+
+.broker-card p {
+  margin: 6px 0;
+
+  color: #cbd5e1;
+
+  font-size: 12px;
+}
+
+.broker-card small {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #94a3b8;
+
+  line-height: 1.4;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.refresh-btn {
+  margin-top: 8px;
+  margin-right: 6px;
+
+  padding: 7px 10px;
+
+  background: #1e293b;
+
+  color: #e2e8f0;
+
+  border: 1px solid #334155;
+  border-radius: 5px;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.refresh-btn:hover {
+  background: #273449;
+  border-color: #22c55e;
+}
+
+.refresh-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =========================
+   MARKET GRID
+========================= */
+
+.market-grid {
+  display: grid;
+
+  grid-template-columns: repeat(5, 1fr);
+
+  gap: 12px;
+
+  margin-bottom: 20px;
+}
+
+.market-box {
+  padding: 16px;
+
+  background: #111827;
+
+  border: 1px solid #273449;
+  border-radius: 8px;
+
+  text-align: center;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.market-box:hover {
+  transform: translateY(-2px);
+
+  border-color: #22c55e;
+}
+
+.market-box h4 {
+  margin: 0 0 10px;
+
+  color: #94a3b8;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.market-box p {
+  margin: 0;
+
+  color: #22c55e;
+
+  font-size: 19px;
+  font-weight: 700;
+}
+
+/* =========================
+   TRADE TABLE
+========================= */
+
+.trade-table {
+  width: 100%;
+
+  border-collapse: separate;
+  border-spacing: 0;
+
+  overflow: hidden;
+
+  background: #111827;
+
+  border: 1px solid #273449;
+  border-radius: 8px;
+
+  font-size: 13px;
+}
+
+.trade-table th {
+  padding: 13px 12px;
+
+  background: #1e293b;
+
+  color: #94a3b8;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-align: left;
+
+  border-bottom: 1px solid #334155;
+
+  white-space: nowrap;
+}
+
+.trade-table td {
+  padding: 12px;
+
+  color: #cbd5e1;
+
+  border-bottom: 1px solid #1e293b;
+
+  white-space: nowrap;
+}
+
+.trade-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.trade-table tbody tr:hover {
+  background: #172033;
+}
+
+.empty-row td {
+  padding: 35px 15px;
+
+  color: #64748b;
+
+  text-align: center;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1200px) {
   .summary-cards {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    margin-bottom: 20px;
-
-    .card {
-      width: 90px;
-      height: 70px;
-      background: #050505;
-      border-radius: 8px;
-      border: 1px solid #1a1a1a;
-      text-align: center;
-      padding: 10px;
-
-      h3 {
-        margin: 0;
-        font-size: 12px;
-        font-weight: 600;
-      }
-
-      h1 {
-        margin-top: 8px;
-        font-size: 28px;
-        font-weight: 700;
-      }
-
-      &.broker-card {
-        width: 180px;
-        height: auto;
-        text-align: left;
-
-        p {
-          margin: 4px 0 0;
-          font-size: 11px;
-          color: #94a3b8;
-        }
-
-        small {
-          display: block;
-          margin-top: 6px;
-          color: #64748b;
-          font-size: 10px;
-        }
-
-        .refresh-btn {
-          margin-top: 8px;
-          width: 100%;
-          height: 28px;
-          border: none;
-          border-radius: 14px;
-          background: #0057d9;
-          color: #fff;
-          font-size: 11px;
-          cursor: pointer;
-        }
-      }
-    }
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .market-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
-    .market-box {
-      background: #050505;
-      border: 1px solid #1f1f1f;
-      border-radius: 8px;
-      padding: 12px;
+@media (max-width: 768px) {
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
 
-      h4 {
-        margin: 0;
-        font-size: 13px;
-        font-weight: 600;
-      }
-
-      p {
-        margin-top: 8px;
-        font-size: 24px;
-        font-weight: bold;
-      }
-    }
+  .market-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .trade-table {
-    width: 100%;
-    border-collapse: collapse;
+    display: block;
+    overflow-x: auto;
+  }
 
-    thead {
-      background: #0052cc;
+  .broker-card {
+    min-height: auto;
+  }
+}
 
-      th {
-        padding: 10px;
-        font-size: 12px;
-        text-align: center;
-        color: #fff;
-      }
-    }
+@media (max-width: 480px) {
+  .market-grid {
+    grid-template-columns: 1fr;
+  }
 
-    tbody {
-      tr {
-        background: #000;
-      }
+  .card {
+    padding: 15px;
+  }
 
-      td {
-        padding: 12px;
-        text-align: center;
-        border-top: 1px solid #1a1a1a;
-      }
-
-      .empty-row {
-        td {
-          height: 350px;
-          font-size: 20px;
-          font-weight: 600;
-          vertical-align: middle;
-        }
-      }
-    }
+  .card h1 {
+    font-size: 26px;
   }
 }

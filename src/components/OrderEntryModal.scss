@@ -1,100 +1,368 @@
 .order-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  display: grid;
-  place-items: center;
-  z-index: 1000;
-  padding: 16px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(4px);
 }
 
 .order-modal-card {
-  width: min(520px, 100%);
-  background: #050505;
-  border: 1px solid #1d2433;
+  width: 100%;
+  max-width: 560px;
+  background: #111827;
+  color: #ffffff;
+  border: 1px solid #374151;
   border-radius: 12px;
-  padding: 16px;
-  color: #fff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  animation: orderModalOpen 0.2s ease-out;
 }
+
+/* =========================
+   HEADER
+========================= */
 
 .order-modal-header {
+  min-height: 64px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
-
-  h3 {
-    margin: 0;
-    color: #ff9800;
-    font-size: 18px;
-  }
-
-  .close-btn {
-    background: transparent;
-    color: #94a3b8;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    line-height: 1;
-  }
+  padding: 0 18px;
+  background: #172033;
+  border-bottom: 1px solid #374151;
 }
+
+.order-modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+/* =========================
+   BUY / SELL TOGGLE
+========================= */
+
+.side-toggle {
+  display: flex !important;
+  gap: 6px !important;
+  margin-left: auto !important;
+  margin-right: 14px !important;
+}
+
+.side-toggle button {
+  min-width: 58px;
+  height: 32px;
+  padding: 0 12px !important;
+  border: 1px solid #4b5563 !important;
+  border-radius: 5px !important;
+  background: #273244 !important;
+  color: #d1d5db !important;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.side-toggle button:hover {
+  transform: translateY(-1px);
+}
+
+.side-toggle button:first-child {
+  background: #273244 !important;
+}
+
+.side-toggle button:last-child {
+  background: #273244 !important;
+}
+
+/*
+  Active BUY / SELL is controlled by React inline style currently.
+  These classes can be used after removing inline styles.
+*/
+
+.side-toggle .buy-active {
+  background: #16a34a !important;
+  border-color: #22c55e !important;
+  color: #ffffff !important;
+}
+
+.side-toggle .sell-active {
+  background: #dc2626 !important;
+  border-color: #ef4444 !important;
+  color: #ffffff !important;
+}
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+
+.order-modal-header .close-btn {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid #4b5563;
+  border-radius: 6px;
+  background: transparent;
+  color: #d1d5db;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.order-modal-header .close-btn:hover {
+  background: #374151;
+  color: #ffffff;
+  border-color: #6b7280;
+}
+
+/* =========================
+   META
+========================= */
 
 .order-modal-meta {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
-  font-size: 12px;
-  color: #94a3b8;
+  padding: 13px 18px;
+  background: #0f172a;
+  border-bottom: 1px solid #374151;
+  font-size: 13px;
+  font-weight: 600;
+  color: #9ca3af;
+}
 
-  .ltp {
-    color: #00d54f;
-    font-weight: 700;
-  }
+.order-modal-meta span:first-child {
+  color: #e5e7eb;
+  font-weight: 700;
+}
+
+.order-modal-meta .ltp {
+  color: #22c55e;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.order-modal-card form {
+  padding: 20px;
 }
 
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin-bottom: 16px;
-
-  label {
-    display: block;
-    font-size: 12px;
-    color: #94a3b8;
-  }
-
-  input,
-  select {
-    width: 100%;
-    margin-top: 4px;
-    height: 34px;
-    background: #11141d;
-    border: 1px solid #1d2433;
-    border-radius: 8px;
-    color: #fff;
-    padding: 0 10px;
-  }
+  gap: 16px;
 }
+
+/* =========================
+   FORM LABEL
+========================= */
+
+.form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: #d1d5db;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* =========================
+   INPUT + SELECT
+========================= */
+
+.form-grid input,
+.form-grid select {
+  width: 100%;
+  height: 42px;
+  box-sizing: border-box;
+  padding: 0 12px;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  outline: none;
+  background: #1f2937;
+  color: #ffffff;
+  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.form-grid input::placeholder {
+  color: #6b7280;
+}
+
+.form-grid input:hover,
+.form-grid select:hover {
+  border-color: #4b5563;
+}
+
+.form-grid input:focus,
+.form-grid select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+  background: #172033;
+}
+
+/* =========================
+   DISABLED INPUT
+========================= */
+
+.form-grid input:disabled {
+  background: #111827 !important;
+  color: #6b7280 !important;
+  border-color: #2d3748;
+  cursor: not-allowed !important;
+  opacity: 0.65 !important;
+}
+
+/* =========================
+   SELECT
+========================= */
+
+.form-grid select {
+  cursor: pointer;
+}
+
+.form-grid select option {
+  background: #1f2937;
+  color: #ffffff;
+}
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
 
 .submit-btn {
   width: 100%;
-  height: 38px;
+  height: 46px;
+  margin-top: 22px;
   border: none;
-  border-radius: 18px;
-  background: #0057d9;
-  color: #fff;
+  border-radius: 7px;
+  color: #ffffff;
+  font-size: 14px;
   font-weight: 700;
+
+  text-transform: uppercase;
+
   cursor: pointer;
 
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  transition:
+    opacity 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.3);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* =========================
+   BUY SUBMIT
+========================= */
+
+.submit-btn.buy {
+  background: #2563eb !important;
+}
+
+.submit-btn.buy:hover:not(:disabled) {
+  background: #1d4ed8 !important;
+}
+
+/* =========================
+   SELL SUBMIT
+========================= */
+
+.submit-btn.sell {
+  background: #dc2626 !important;
+}
+
+.submit-btn.sell:hover:not(:disabled) {
+  background: #b91c1c !important;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes orderModalOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-15px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
-@media (max-width: 640px) {
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .order-modal-overlay {
+    padding: 12px;
+  }
+
+  .order-modal-card {
+    max-width: 100%;
+    max-height: 95vh;
+    overflow-y: auto;
+  }
+
+  .order-modal-header {
+    min-height: 58px;
+    padding: 0 12px;
+  }
+
+  .order-modal-header h3 {
+    font-size: 15px;
+  }
+
+  .side-toggle {
+    margin-right: 8px !important;
+  }
+
+  .side-toggle button {
+    min-width: 48px;
+    padding: 0 8px !important;
+  }
+
+  .order-modal-card form {
+    padding: 15px;
+  }
+
   .form-grid {
     grid-template-columns: 1fr;
+    gap: 13px;
   }
 }
