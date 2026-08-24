@@ -1,5 +1,9 @@
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "/api";
-const hubBaseUrl = import.meta.env.VITE_HUB_BASE_URL ?? "";
+const runtimeConfig =
+  typeof window !== "undefined" && (window as any).RUNTIME_CONFIG;
+const apiBaseUrl: string =
+  runtimeConfig?.API_BASE_URL || import.meta.env.VITE_API_BASE_URL || "/api";
+const hubBaseUrl: string =
+  runtimeConfig?.HUB_BASE_URL || import.meta.env.VITE_HUB_BASE_URL || "";
 
 export const protectedResources = {
   authAPI: {

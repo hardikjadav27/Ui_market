@@ -13,12 +13,12 @@ interface ModifyOrderModalProps {
 
 function ModifyOrderModal({ open, order, onClose }: ModifyOrderModalProps) {
   const { getTick, reloadTradingData, subscribe, unsubscribe } = useMarket();
-  
+
   const symbol = order?.symbol || "";
   const exchange = order?.exchange || "";
   const instrumentType = order?.instrumentType || "";
   const orderSide = order?.transactionType || "BUY";
-  
+
   const tick = getTick(symbol, exchange);
 
   const [orderType, setOrderType] = useState("LIMIT");
@@ -38,10 +38,14 @@ function ModifyOrderModal({ open, order, onClose }: ModifyOrderModalProps) {
     }
   }, [order]);
 
-  const handleNumericChange = (value: string, setter: (val: string | number) => void) => {
+  const handleNumericChange = (
+    value: string,
+    setter: (val: string | number) => void,
+  ) => {
     const sanitized = value.replace(/[^0-9.]/g, "");
     const parts = sanitized.split(".");
-    const finalValue = parts[0] + (parts.length > 1 ? "." + parts.slice(1).join("") : "");
+    const finalValue =
+      parts[0] + (parts.length > 1 ? "." + parts.slice(1).join("") : "");
     setter(finalValue);
   };
 
@@ -64,9 +68,11 @@ function ModifyOrderModal({ open, order, onClose }: ModifyOrderModalProps) {
     setLoading(true);
     const ltp = tick?.ltp ?? 0;
     const numPrice = orderType === "SL-M" ? 0 : Number(price);
-    const numTrigger = (orderType === "SL" || orderType === "SL-M") ? Number(triggerPrice) : 0;
-    const numTarget = 0; 
-    const numSL = (orderType === "SL" || orderType === "SL-M") ? Number(stopLoss) : 0;
+    const numTrigger =
+      orderType === "SL" || orderType === "SL-M" ? Number(triggerPrice) : 0;
+    const numTarget = 0;
+    const numSL =
+      orderType === "SL" || orderType === "SL-M" ? Number(stopLoss) : 0;
 
     if (orderType === "SL" || orderType === "SL-M") {
       if (numTrigger <= 0) {
@@ -76,12 +82,16 @@ function ModifyOrderModal({ open, order, onClose }: ModifyOrderModalProps) {
       }
       if (ltp > 0) {
         if (orderSide === "BUY" && numTrigger <= ltp) {
-          toast.error(`For BUY ${orderType}, Trigger Price (${numTrigger}) must be greater than LTP (${ltp})`);
+          toast.error(
+            `For BUY ${orderType}, Trigger Price (${numTrigger}) must be greater than LTP (${ltp})`,
+          );
           setLoading(false);
           return;
         }
         if (orderSide === "SELL" && numTrigger >= ltp) {
-          toast.error(`For SELL ${orderType}, Trigger Price (${numTrigger}) must be less than LTP (${ltp})`);
+          toast.error(
+            `For SELL ${orderType}, Trigger Price (${numTrigger}) must be less than LTP (${ltp})`,
+          );
           setLoading(false);
           return;
         }
@@ -90,12 +100,16 @@ function ModifyOrderModal({ open, order, onClose }: ModifyOrderModalProps) {
 
     if (orderType === "SL") {
       if (orderSide === "BUY" && numPrice < numTrigger) {
-        toast.error("For BUY SL, Limit Price must be greater than or equal to Trigger Price");
+        toast.error(
+          "For BUY SL, Limit Price must be greater than or equal to Trigger Price",
+        );
         setLoading(false);
         return;
       }
       if (orderSide === "SELL" && numPrice > numTrigger) {
-        toast.error("For SELL SL, Limit Price must be less than or equal to Trigger Price");
+        toast.error(
+          "For SELL SL, Limit Price must be less than or equal to Trigger Price",
+        );
         setLoading(false);
         return;
       }
@@ -105,7 +119,8 @@ function ModifyOrderModal({ open, order, onClose }: ModifyOrderModalProps) {
       const payload: ModifyOrderRequest = {
         orderType,
         quantity: Number(quantity),
-        price: orderType === "MARKET" ? ltp : orderType === "SL-M" ? 0 : numPrice,
+        price:
+          orderType === "MARKET" ? ltp : orderType === "SL-M" ? 0 : numPrice,
         triggerPrice: numTrigger,
         stopLoss: numSL,
         target: numTarget,
@@ -143,7 +158,10 @@ function ModifyOrderModal({ open, order, onClose }: ModifyOrderModalProps) {
           <div className="form-grid">
             <label>
               Order Type
-              <select value={orderType} onChange={(e) => setOrderType(e.target.value)}>
+              <select
+                value={orderType}
+                onChange={(e) => setOrderType(e.target.value)}
+              >
                 <option value="MARKET">MARKET</option>
                 <option value="LIMIT">LIMIT</option>
                 <option value="SL">SL</option>
@@ -156,7 +174,9 @@ function ModifyOrderModal({ open, order, onClose }: ModifyOrderModalProps) {
               <input
                 type="text"
                 value={quantity}
-                onChange={(e) => handleNumericChange(e.target.value, setQuantity)}
+                onChange={(e) =>
+                  handleNumericChange(e.target.value, setQuantity)
+                }
               />
             </label>
 
@@ -168,10 +188,20 @@ function ModifyOrderModal({ open, order, onClose }: ModifyOrderModalProps) {
                 onChange={(e) => handleNumericChange(e.target.value, setPrice)}
                 disabled={orderType === "MARKET" || orderType === "SL-M"}
                 style={{
-                  backgroundColor: (orderType === "MARKET" || orderType === "SL-M") ? "#2a2a2a" : undefined,
-                  color: (orderType === "MARKET" || orderType === "SL-M") ? "#888" : undefined,
-                  cursor: (orderType === "MARKET" || orderType === "SL-M") ? "not-allowed" : undefined,
-                  opacity: (orderType === "MARKET" || orderType === "SL-M") ? 0.6 : 1
+                  backgroundColor:
+                    orderType === "MARKET" || orderType === "SL-M"
+                      ? "#2a2a2a"
+                      : undefined,
+                  color:
+                    orderType === "MARKET" || orderType === "SL-M"
+                      ? "#888"
+                      : undefined,
+                  cursor:
+                    orderType === "MARKET" || orderType === "SL-M"
+                      ? "not-allowed"
+                      : undefined,
+                  opacity:
+                    orderType === "MARKET" || orderType === "SL-M" ? 0.6 : 1,
                 }}
               />
             </label>
@@ -183,7 +213,9 @@ function ModifyOrderModal({ open, order, onClose }: ModifyOrderModalProps) {
                   <input
                     type="text"
                     value={triggerPrice}
-                    onChange={(e) => handleNumericChange(e.target.value, setTriggerPrice)}
+                    onChange={(e) =>
+                      handleNumericChange(e.target.value, setTriggerPrice)
+                    }
                   />
                 </label>
 
@@ -192,14 +224,23 @@ function ModifyOrderModal({ open, order, onClose }: ModifyOrderModalProps) {
                   <input
                     type="text"
                     value={stopLoss}
-                    onChange={(e) => handleNumericChange(e.target.value, setStopLoss)}
+                    onChange={(e) =>
+                      handleNumericChange(e.target.value, setStopLoss)
+                    }
                   />
                 </label>
               </>
             )}
           </div>
 
-          <button type="submit" className="submit-btn" disabled={loading} style={{ backgroundColor: orderSide === 'BUY' ? '#2196F3' : '#f44336' }}>
+          <button
+            type="submit"
+            className="submit-btn"
+            disabled={loading}
+            style={{
+              backgroundColor: orderSide === "BUY" ? "#2196F3" : "#f44336",
+            }}
+          >
             {loading ? "Modifying..." : `Modify ${orderSide} Order`}
           </button>
         </form>
