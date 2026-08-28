@@ -12,14 +12,26 @@ function Pending() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [editingOrder, setEditingOrder] = useState<OrderDto | null>(null);
 
-  const pendingOrders = useMemo(() => orders.filter((o) => o.status === "Pending"), [orders]);
-  const executedOrders = useMemo(() => orders.filter((o) => o.status === "Complete"), [orders]);
-  const rejectedOrders = useMemo(() => orders.filter((o) => o.status === "Cancelled"), [orders]);
+  const pendingOrders = useMemo(
+    () => orders.filter((o) => o.status === "Pending"),
+    [orders],
+  );
+  const executedOrders = useMemo(
+    () => orders.filter((o) => o.status === "Complete"),
+    [orders],
+  );
+  const rejectedOrders = useMemo(
+    () => orders.filter((o) => o.status === "Cancelled"),
+    [orders],
+  );
 
   const filtered = useMemo(() => {
     return orders.filter((order) => {
-      const matchesSearch = order.symbol.toLowerCase().includes(search.trim().toLowerCase());
-      const matchesStatus = statusFilter === "All" || order.status === statusFilter;
+      const matchesSearch = order.symbol
+        .toLowerCase()
+        .includes(search.trim().toLowerCase());
+      const matchesStatus =
+        statusFilter === "All" || order.status === statusFilter;
       return matchesSearch && matchesStatus;
     });
   }, [orders, search, statusFilter]);
@@ -46,10 +58,10 @@ function Pending() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <select 
-              className="search-box" 
-              style={{ marginLeft: '10px' }}
-              value={statusFilter} 
+            <select
+              className="search-box"
+              // style={{ marginLeft: '10px' }}
+              value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
             >
               <option value="All">All Orders</option>
@@ -60,7 +72,10 @@ function Pending() {
           </div>
 
           <div className="right-side">
-            <button className="reload-btn" onClick={() => void reloadTradingData()}>
+            <button
+              className="reload-btn"
+              onClick={() => void reloadTradingData()}
+            >
               RELOAD
             </button>
           </div>
@@ -110,8 +125,12 @@ function Pending() {
                   <td>{order.exchange}</td>
                   <td>{order.symbol}</td>
                   <td>{order.filledQty || order.quantity}</td>
-                  <td>{order.averagePrice ? formatPrice(order.averagePrice) : "-"}</td>
-                  <td>{order.triggerPrice ? formatPrice(order.triggerPrice) : "-"}</td>
+                  <td>
+                    {order.averagePrice ? formatPrice(order.averagePrice) : "-"}
+                  </td>
+                  <td>
+                    {order.triggerPrice ? formatPrice(order.triggerPrice) : "-"}
+                  </td>
                   <td>{order.price ? formatPrice(order.price) : "-"}</td>
                   <td>{order.stopLoss ? formatPrice(order.stopLoss) : "-"}</td>
                   <td>{order.transactionType}</td>
@@ -120,7 +139,7 @@ function Pending() {
                   <td>{new Date(order.createdAt).toLocaleString()}</td>
                   <td>
                     {order.status === "Pending" && (
-                      <div style={{ display: "flex", gap: "8px" }}>
+                      <div className="action-buttons">
                         <button
                           type="button"
                           className="clear-btn"
@@ -154,10 +173,10 @@ function Pending() {
         </table>
       </div>
 
-      <ModifyOrderModal 
-        open={editingOrder !== null} 
-        order={editingOrder} 
-        onClose={() => setEditingOrder(null)} 
+      <ModifyOrderModal
+        open={editingOrder !== null}
+        order={editingOrder}
+        onClose={() => setEditingOrder(null)}
       />
     </>
   );

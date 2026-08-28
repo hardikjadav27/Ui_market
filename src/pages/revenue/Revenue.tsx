@@ -48,7 +48,9 @@ function Revenue() {
         <tbody>
           {rows.length === 0 ? (
             <tr>
-              <td colSpan={7}>{loading ? "Loading..." : "No revenue records"}</td>
+              <td colSpan={7} className="revenue-empty">
+                {loading ? "Loading..." : "No revenue records"}
+              </td>
             </tr>
           ) : (
             rows.map((row) => (
@@ -86,7 +88,8 @@ function Revenue() {
             <strong>Execution:</strong> {selected.sourceExecutionId}
           </p>
           <p>
-            <strong>Source:</strong> {selected.sourceUserName || selected.sourceUserId}
+            <strong>Source:</strong>{" "}
+            {selected.sourceUserName || selected.sourceUserId}
           </p>
           <p>
             <strong>Rate:</strong> {formatSharingRate(selected.appliedRate)}

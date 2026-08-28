@@ -1,163 +1,325 @@
+/* =========================================
+   HOLDING PAGE
+========================================= */
+
 .holding-page {
-  background: #000;
-  color: #fff;
-  min-height: 100vh;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Header */
+/* =========================================
+   HEADER
+========================================= */
+
 .holding-header-row {
+  width: 100%;
+  min-height: 74px;
+  padding: 16px 20px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin: 0 12px 9px 13px;
+  justify-content: space-between;
+  gap: 15px;
+  background: #111827;
+  border: 1px solid #252d3a;
+  border-radius: 8px;
+  box-sizing: border-box;
 }
 
 .records {
+  height: 38px;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  background: #1b2430;
+  border: 1px solid #303b4b;
+  border-radius: 5px;
+  color: #d6dbe3;
   font-size: 12px;
   font-weight: 700;
-  color: #fff;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .search-section {
+  margin-left: auto;
+
   input {
-    width: 150px;
-    height: 30px;
-    border-radius: 20px;
-    border: 1px solid #1d2940;
-    background: #10141c;
-    color: #fff;
+    width: 230px;
+    height: 38px;
     padding: 0 12px;
+    background: #0d131c;
+    border: 1px solid #303b4b;
+    border-radius: 5px;
     outline: none;
+    color: #f5f7fa;
+    font-size: 13px;
+    box-sizing: border-box;
+
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
 
     &::placeholder {
-      color: #999;
+      color: #737d8d;
+    }
+
+    &:focus {
+      border-color: #4c8bf5;
+      box-shadow: 0 0 0 2px rgba(76, 139, 245, 0.12);
     }
   }
 }
 
-/* Summary Cards */
+/* =========================================
+   SUMMARY
+========================================= */
+
 .holding-summary {
+  margin-top: 15px;
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin: 0 0 12px 12px;
+  align-items: center;
 }
 
 .pl-card {
-  width: 90px;
-  height: 60px;
-  border: 1px solid #1d2940;
-  border-radius: 4px;
-  background: #050505;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  min-width: 165px;
+  padding: 12px 18px;
+  background: #111827;
+  border: 1px solid #252d3a;
+  border-radius: 7px;
+  box-sizing: border-box;
 
   .title {
-    font-size: 11px;
+    margin-bottom: 5px;
+    color: #8993a3;
+    font-size: 10px;
     font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
   }
 
   .value {
-    color: #00ff4c;
-    font-size: 20px;
+    color: #e5e7eb;
+    font-size: 18px;
     font-weight: 700;
   }
 }
 
-.exchange-card {
-  width: 95px;
-  height: 60px;
-  border: 1px solid #1d2940;
-  border-radius: 4px;
-  background: #050505;
-  padding: 4px 6px;
-  box-sizing: border-box;
-}
+/* =========================================
+   TABLE WRAPPER
+========================================= */
 
-.buy-row,
-.sell-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.buy-row {
-  color: #00ff4c;
-}
-
-.sell-row {
-  color: #ff2b2b;
-}
-
-.exchange-name {
-  text-align: center;
-  font-size: 10px;
-  font-weight: 700;
-  margin: 6px 0;
-  color: #fff;
-}
-
-/* Table */
 .holding-table-wrapper {
   width: 100%;
+  margin-top: 15px;
+  overflow-x: auto;
+  background: #111827;
+  border: 1px solid #252d3a;
+  border-radius: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #3a4657 #111827;
+
+  &::-webkit-scrollbar {
+    height: 7px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #111827;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #3a4657;
+    border-radius: 10px;
+  }
 }
+
+/* =========================================
+   HOLDING TABLE
+========================================= */
 
 .holding-table {
   width: 100%;
+  min-width: 850px;
   border-collapse: collapse;
+  table-layout: auto;
 
   thead {
-    background: #0057d9;
+    background: #18202c;
+
+    tr {
+      border-bottom: 1px solid #303b4b;
+    }
 
     th {
-      padding: 8px;
-      text-align: center;
-      font-size: 11px;
-      color: #fff;
+      height: 45px;
+      padding: 0 14px;
+      color: #8f9aaa;
+      font-size: 10px;
       font-weight: 700;
+      letter-spacing: 0.7px;
+      text-align: center;
       white-space: nowrap;
+      text-transform: uppercase;
     }
   }
 
   tbody {
+    tr {
+      height: 52px;
+      border-bottom: 1px solid #202938;
+      transition: background 0.15s ease;
+
+      &:hover {
+        background: #17202c;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
     td {
-      color: #fff;
+      padding: 8px 14px;
+      color: #d8dde5;
+      font-size: 12px;
+      font-weight: 500;
       text-align: center;
-      border-top: 1px solid #111;
+      white-space: nowrap;
+      vertical-align: middle;
     }
   }
 }
 
+/* =========================================
+   SYMBOL
+========================================= */
+
+.holding-table {
+  td:first-child {
+    color: #f1f5f9;
+    font-weight: 700;
+    text-align: left;
+  }
+
+  th:first-child {
+    text-align: left;
+  }
+}
+
+/* =========================================
+   SIDE
+========================================= */
+
+.holding-table {
+  td:nth-child(3) {
+    font-weight: 700;
+  }
+}
+
+/* =========================================
+   PROFIT / LOSS
+========================================= */
+
+.profit {
+  color: #22c55e !important;
+  font-weight: 700 !important;
+}
+
+.loss {
+  color: #ef4444 !important;
+  font-weight: 700 !important;
+}
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
 .empty-row {
-  height: 500px;
+  height: 280px !important;
+  padding: 0 !important;
 }
 
 .empty-state {
+  min-height: 260px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: #697384;
 
   h2 {
-    margin-bottom: 8px;
-    font-size: 20px;
+    margin: 0 0 7px;
+
+    color: #a1a9b5;
+    font-size: 18px;
+    font-weight: 600;
   }
 
   p {
-    color: #fff;
-    font-size: 14px;
+    margin: 0;
+    color: #697384;
+    font-size: 12px;
   }
 }
 
-.holding-table {
-  .profit {
-    color: #00d54f;
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+  .holding-header-row {
+    min-height: auto;
+    padding: 14px;
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .loss {
-    color: #ff1e1e;
+  .records {
+    width: 100%;
+  }
+
+  .search-section {
+    width: 100%;
+    margin-left: 0;
+
+    input {
+      width: 100%;
+    }
+  }
+
+  .holding-summary {
+    width: 100%;
+  }
+
+  .pl-card {
+    width: 100%;
+  }
+
+  .holding-table {
+    min-width: 850px;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+  .holding-header-row {
+    padding: 12px;
+  }
+
+  .records {
+    justify-content: center;
+  }
+
+  .pl-card {
+    padding: 11px 14px;
+
+    .value {
+      font-size: 17px;
+    }
   }
 }

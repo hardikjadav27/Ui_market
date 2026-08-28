@@ -1,50 +1,389 @@
+/* =========================================
+   REVENUE PAGE
+========================================= */
+
 .revenue-page {
-  padding: 12px;
-  background: #000;
-  color: #fff;
-  min-height: 100vh;
-  font-size: 12px;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  color: #e8edf5;
 }
+
+/* =========================================
+   HEADER
+========================================= */
 
 .revenue-header {
+  min-height: 52px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 0 16px;
+  border: 1px solid #293342;
+  border-radius: 8px;
+  background: #161d27;
 }
+
+.revenue-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.revenue-header > div {
+  display: flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 13px;
+  border: 1px solid #303b4c;
+  border-radius: 6px;
+  background: #1c2430;
+  color: #aeb9c8;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+/* =========================================
+   ERROR
+========================================= */
 
 .revenue-error {
-  color: #f87171;
+  margin: 0 0 14px;
+  padding: 11px 14px;
+  border: 1px solid #54333d;
+  border-radius: 6px;
+  background: #281b20;
+  color: #ff8f9f;
+  font-size: 12px;
+  font-weight: 600;
 }
 
-.revenue-page table {
+/* =========================================
+   REVENUE TABLE
+========================================= */
+
+.revenue-page > table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border: 1px solid #293342;
+  border-radius: 8px;
+  background: #141a23;
 }
 
-.revenue-page thead {
-  background: #0047ab;
+/* =========================================
+   TABLE HEADER
+========================================= */
+
+.revenue-page > table thead {
+  background: #1b2330;
 }
 
-.revenue-page th,
-.revenue-page td {
-  padding: 8px;
+.revenue-page > table th {
+  height: 42px;
+  padding: 0 13px;
+  border-bottom: 1px solid #303a49;
+  color: #8996a8;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
   text-align: left;
+  white-space: nowrap;
 }
 
-.revenue-page button {
-  background: #0057d9;
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  padding: 4px 10px;
-  cursor: pointer;
+/* =========================================
+   TABLE BODY
+========================================= */
+
+.revenue-page > table td {
+  height: 46px;
+  padding: 7px 13px;
+  border-bottom: 1px solid #242d39;
+  color: #cbd3de;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
 }
+
+.revenue-page > table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.revenue-page > table tbody tr:hover {
+  background: #1b2330;
+}
+
+.revenue-page > table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* =========================================
+   REVENUE-EMPTY
+========================================= */
+
+// revenue-empty
+
+.revenue-empty {
+  height: 180px !important;
+  text-align: center !important;
+  vertical-align: middle;
+  color: #6f7b8d !important;
+  font-size: 13px !important;
+}
+
+/* =========================================
+   COLUMN ALIGNMENT
+========================================= */
+
+/* Rate and Amount */
+
+.revenue-page > table th:nth-child(4),
+.revenue-page > table th:nth-child(5),
+.revenue-page > table td:nth-child(4),
+.revenue-page > table td:nth-child(5) {
+  text-align: right;
+}
+
+/* Status */
+
+.revenue-page > table th:nth-child(6),
+.revenue-page > table td:nth-child(6) {
+  text-align: center;
+}
+
+/* Action */
+
+.revenue-page > table th:last-child,
+.revenue-page > table td:last-child {
+  width: 80px;
+  text-align: center;
+}
+
+/* =========================================
+   STATUS
+========================================= */
+
+.revenue-page > table td:nth-child(6) {
+  color: #8fd7b0;
+  font-weight: 600;
+}
+
+/* =========================================
+   WHY BUTTON
+========================================= */
+
+.revenue-page > table td button {
+  height: 30px;
+  min-width: 55px;
+  padding: 0 10px;
+  border: 1px solid #3b475a;
+  border-radius: 5px;
+  background: #252f3e;
+  color: #dce3ec;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.revenue-page > table td button:hover {
+  background: #303b4d;
+  border-color: #536177;
+}
+
+.revenue-page > table td button:active {
+  transform: translateY(1px);
+}
+
+/* =========================================
+   EMPTY / LOADING ROW
+========================================= */
+
+.revenue-page > table tbody tr td[colspan="7"] {
+  height: 180px;
+  text-align: center;
+  color: #6f7b8d;
+  font-size: 13px;
+}
+
+/* =========================================
+   REVENUE DRAWER
+========================================= */
 
 .revenue-drawer {
-  margin-top: 16px;
-  border: 1px solid #333;
-  padding: 16px;
-  border-radius: 8px;
-  background: #111827;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(420px, 92vw);
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 24px;
+  overflow-y: auto;
+  background: #141a23;
+  border-left: 1px solid #303a49;
+  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.35);
+  z-index: 1000;
+  animation: revenueDrawerIn 0.2s ease-out;
+}
+
+@keyframes revenueDrawerIn {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* =========================================
+   DRAWER TITLE
+========================================= */
+
+.revenue-drawer h3 {
+  margin: 0 0 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #2d3745;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+/* =========================================
+   DRAWER DETAILS
+========================================= */
+
+.revenue-drawer p {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0;
+  padding: 12px 0;
+  border-bottom: 1px solid #242d39;
+  color: #aeb9c8;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.revenue-drawer p strong {
+  color: #778497;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.revenue-drawer p:last-of-type {
+  border-bottom: none;
+}
+
+/* =========================================
+   CALCULATION
+========================================= */
+
+.revenue-drawer p:nth-of-type(7) {
+  background: #181f29;
+  margin: 8px 0;
+  padding: 12px;
+  border: 1px solid #293342;
+  border-radius: 6px;
+}
+
+/* =========================================
+   DRAWER CLOSE BUTTON
+========================================= */
+
+.revenue-drawer > button {
+  width: 100%;
+  height: 40px;
+  margin-top: 22px;
+  border: 1px solid #3c485b;
+  border-radius: 6px;
+  background: #252f3e;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.revenue-drawer > button:hover {
+  background: #303b4d;
+  border-color: #536177;
+}
+
+/* =========================================
+   DRAWER SCROLLBAR
+========================================= */
+
+.revenue-drawer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.revenue-drawer::-webkit-scrollbar-track {
+  background: #11161e;
+}
+
+.revenue-drawer::-webkit-scrollbar-thumb {
+  background: #354052;
+  border-radius: 10px;
+}
+
+.revenue-drawer::-webkit-scrollbar-thumb:hover {
+  background: #46546a;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+  .revenue-page {
+    padding: 14px;
+  }
+
+  .revenue-page > table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .revenue-page > table {
+    min-width: 850px;
+  }
+}
+
+@media (max-width: 600px) {
+  .revenue-page {
+    padding: 10px;
+  }
+
+  .revenue-header {
+    padding: 0 12px;
+  }
+
+  .revenue-header h2 {
+    font-size: 15px;
+  }
+
+  .revenue-header > div {
+    font-size: 10px;
+    padding: 0 9px;
+  }
+
+  .revenue-drawer {
+    width: 100%;
+    padding: 18px;
+  }
 }

@@ -20,7 +20,9 @@ function Wallet() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [type, setType] = useState("");
-  const [walletType, setWalletType] = useState<"TRADING" | "COMMISSION">("TRADING");
+  const [walletType, setWalletType] = useState<"TRADING" | "COMMISSION">(
+    "TRADING",
+  );
   const [rows, setRows] = useState<StatementRow[]>([]);
   const [wallets, setWallets] = useState<WalletDto[]>([]);
   const [asChild, setAsChild] = useState<SharingDueAccount | null>(null);
@@ -49,7 +51,9 @@ function Wallet() {
           type: type || undefined,
           walletType,
         }),
-        getMySharingDues().catch(() => ({ data: { asChild: null, asParent: [] } })),
+        getMySharingDues().catch(() => ({
+          data: { asChild: null, asParent: [] },
+        })),
       ]);
       const data = walletRes.data;
       setWallets(Array.isArray(data) ? data : data ? [data] : []);
@@ -86,7 +90,11 @@ function Wallet() {
     if (!selectedChildId || !cashAmount) return;
     try {
       setMessage("");
-      await confirmShareCash(selectedChildId, Number(cashAmount), cashNote || undefined);
+      await confirmShareCash(
+        selectedChildId,
+        Number(cashAmount),
+        cashNote || undefined,
+      );
       setMessage("Cash share confirmed");
       setCashAmount("");
       setCashNote("");
@@ -101,7 +109,11 @@ function Wallet() {
     if (!topUpUserId || !topUpAmount) return;
     try {
       setMessage("");
-      await tradingTopUp(Number(topUpUserId), Number(topUpAmount), topUpNote || undefined);
+      await tradingTopUp(
+        Number(topUpUserId),
+        Number(topUpAmount),
+        topUpNote || undefined,
+      );
       setMessage("Trading top-up posted");
       setTopUpAmount("");
       setTopUpNote("");
@@ -116,7 +128,10 @@ function Wallet() {
       <div className="wallet-top">
         <div className="wallet-left">
           <div className="wallet-tabs">
-            <button className={walletType === "TRADING" ? "active" : ""} onClick={() => setWalletType("TRADING")}>
+            <button
+              className={walletType === "TRADING" ? "active" : ""}
+              onClick={() => setWalletType("TRADING")}
+            >
               TRADING
             </button>
             <button
@@ -128,9 +143,17 @@ function Wallet() {
           </div>
           <div className="wallet-info">
             <div className="records">RECORDS : {rows.length}</div>
-            <div className="total">TRADING : ₹ {formatMoney(trading?.availableBalance)}</div>
-            <div className="total">COMMISSION : ₹ {formatMoney(commission?.availableBalance)}</div>
-            {asChild && <div className="total">DUE TO PARENT : ₹ {formatMoney(asChild.accruedDue)}</div>}
+            <div className="total">
+              TRADING : ₹ {formatMoney(trading?.availableBalance)}
+            </div>
+            <div className="total">
+              COMMISSION : ₹ {formatMoney(commission?.availableBalance)}
+            </div>
+            {asChild && (
+              <div className="total">
+                DUE TO PARENT : ₹ {formatMoney(asChild.accruedDue)}
+              </div>
+            )}
           </div>
         </div>
 
@@ -140,8 +163,16 @@ function Wallet() {
             <option value="credit">Credit</option>
             <option value="debit">Debit</option>
           </select>
-          <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} />
-          <input type="date" value={to} onChange={(e) => setTo(e.target.value)} />
+          <input
+            type="date"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+          />
+          <input
+            type="date"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+          />
           <button className="filter-btn" onClick={load} disabled={loading}>
             Filter
           </button>
@@ -149,13 +180,33 @@ function Wallet() {
       </div>
 
       {error && <p className="wallet-error">{error}</p>}
-      {message && <p className="wallet-error" style={{ color: "green" }}>{message}</p>}
+      {message && <p className="wallet-success">{message}</p>}
 
       {roleId !== 5 && (
-        <div className="wallet-filters" style={{ marginBottom: 12, gap: 8, display: "flex", flexWrap: "wrap" }}>
-          <input placeholder="Child user id" value={topUpUserId} onChange={(e) => setTopUpUserId(e.target.value)} />
-          <input placeholder="Top-up amount" value={topUpAmount} onChange={(e) => setTopUpAmount(e.target.value)} />
-          <input placeholder="Note / why" value={topUpNote} onChange={(e) => setTopUpNote(e.target.value)} />
+        <div
+          className="wallet-filters"
+          style={{
+            marginBottom: 12,
+            gap: 8,
+            display: "flex",
+            flexWrap: "wrap",
+          }}
+        >
+          <input
+            placeholder="Child user id"
+            value={topUpUserId}
+            onChange={(e) => setTopUpUserId(e.target.value)}
+          />
+          <input
+            placeholder="Top-up amount"
+            value={topUpAmount}
+            onChange={(e) => setTopUpAmount(e.target.value)}
+          />
+          <input
+            placeholder="Note / why"
+            value={topUpNote}
+            onChange={(e) => setTopUpNote(e.target.value)}
+          />
           <button className="filter-btn" onClick={onTopUp}>
             Grant trading
           </button>
@@ -185,7 +236,10 @@ function Wallet() {
                   <td>{formatMoney(row.totalAccrued)}</td>
                   <td>{formatMoney(row.totalPaid)}</td>
                   <td>
-                    <button className="filter-btn" onClick={() => openHistory(row.childUserId)}>
+                    <button
+                      className="filter-btn"
+                      onClick={() => openHistory(row.childUserId)}
+                    >
                       Audit / confirm
                     </button>
                   </td>
@@ -198,10 +252,26 @@ function Wallet() {
 
       {selectedChildId && (
         <div style={{ marginBottom: 16 }}>
-          <div className="wallet-filters" style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 8 }}>
+          <div
+            className="wallet-filters"
+            style={{
+              display: "flex",
+              gap: 8,
+              flexWrap: "wrap",
+              marginBottom: 8,
+            }}
+          >
             <span>Confirm cash for child #{selectedChildId}</span>
-            <input placeholder="Amount" value={cashAmount} onChange={(e) => setCashAmount(e.target.value)} />
-            <input placeholder="Note" value={cashNote} onChange={(e) => setCashNote(e.target.value)} />
+            <input
+              placeholder="Amount"
+              value={cashAmount}
+              onChange={(e) => setCashAmount(e.target.value)}
+            />
+            <input
+              placeholder="Note"
+              value={cashNote}
+              onChange={(e) => setCashNote(e.target.value)}
+            />
             <button className="filter-btn" onClick={onConfirmCash}>
               Confirm cash
             </button>

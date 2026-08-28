@@ -21,6 +21,7 @@ export interface User {
   partnershipType?: string;
   rentalAmount?: number;
   rentalCycleDays?: number;
+  marginMultiplier?: number;
 }
 
 export interface CreateUserRequest {

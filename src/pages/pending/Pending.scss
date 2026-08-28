@@ -1,160 +1,470 @@
+/* =========================================
+   PENDING PAGE
+========================================= */
+
 .pending-header {
-  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 20px;
+  background: #0f172a;
+  color: #ffffff;
+  border-bottom: 1px solid #374151;
 }
+
+/* =========================================
+   TOP ROW
+========================================= */
 
 .top-row {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 15px;
 }
 
 .left-side {
   display: flex;
+  align-items: center;
   gap: 10px;
-  align-items: center;
-}
-
-.records-box {
-  height: 32px;
-  padding: 0 12px;
-  border: 1px solid #1d2433;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  color: #fff;
-  font-size: 12px;
-}
-
-.search-box {
-  width: 140px;
-  height: 32px;
-  background: #050505;
-  border: 1px solid #1d2433;
-  border-radius: 18px;
-  padding: 0 12px;
-  color: #fff;
+  min-width: 0;
 }
 
 .right-side {
   display: flex;
-  gap: 8px;
   align-items: center;
-
-  select {
-    width: 150px;
-    height: 34px;
-    background: #151822;
-    border: none;
-    border-radius: 20px;
-    color: #fff;
-    padding: 0 12px;
-  }
 }
 
-.clear-btn {
-  height: 34px;
-  padding: 0 16px;
-  border: none;
-  border-radius: 18px;
-  background: #ff1e1e;
-  color: #fff;
-  font-weight: 700;
+/* =========================================
+   RECORDS
+========================================= */
+
+.records-box {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  background: #1e293b;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  color: #d1d5db;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
 }
+
+/* =========================================
+   SEARCH / FILTER
+========================================= */
+
+.search-box {
+  width: 190px;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 0 12px;
+  background: #111827;
+  color: #ffffff;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  outline: none;
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.search-box::placeholder {
+  color: #6b7280;
+}
+
+.search-box:hover {
+  border-color: #4b5563;
+}
+
+.search-box:focus {
+  border-color: #3b82f6;
+  background: #172033;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.12);
+}
+
+/* SELECT */
+
+select.search-box {
+  width: 150px;
+  cursor: pointer;
+}
+
+select.search-box option {
+  background: #111827;
+  color: #ffffff;
+}
+
+/* =========================================
+   RELOAD BUTTON
+========================================= */
 
 .reload-btn {
-  height: 34px;
-  padding: 0 16px;
-  border: none;
-  border-radius: 18px;
-  background: #0057d9;
-  color: #fff;
+  height: 40px;
+  padding: 0 18px;
+  border: 1px solid #2563eb;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 12px;
   font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
 }
 
+.reload-btn:hover {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.reload-btn:active {
+  transform: translateY(0);
+}
+
+/* =========================================
+   BOTTOM ROW
+========================================= */
+
 .bottom-row {
-  margin-top: 12px;
-  display: flex;
-  justify-content: space-between;
+  margin-top: 16px;
 }
 
 .pl-section {
   display: flex;
-  gap: 10px;
+  align-items: center;
+
+  gap: 12px;
 }
 
-.info-card,
-.summary-card {
-  border: 1px solid #1d2433;
-  border-radius: 8px;
-  background: #050505;
-  padding: 8px 12px;
-  min-width: 90px;
+/* =========================================
+   INFO CARDS
+========================================= */
 
-  span {
-    display: block;
-    font-size: 9px;
-    color: #fff;
-    margin-bottom: 4px;
-  }
-
-  strong {
-    font-size: 18px;
-    color: #0078ff;
-  }
+.info-card {
+  min-width: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 10px 14px;
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: 7px;
+  box-sizing: border-box;
 }
+
+.info-card span {
+  color: #9ca3af;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.info-card strong {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* =========================================
+   TABLE WRAPPER
+========================================= */
 
 .pending-table-wrapper {
   width: 100%;
-  margin-top: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: #0f172a;
+  border-bottom: 1px solid #374151;
 }
+
+/* =========================================
+   TABLE
+========================================= */
 
 .pending-table {
   width: 100%;
+  min-width: 1150px;
   border-collapse: collapse;
-  background: #000;
-
-  thead {
-    background: #0057d9;
-
-    th {
-      color: #fff;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 5px;
-      text-align: center;
-      white-space: nowrap;
-    }
-  }
-
-  tbody {
-    td {
-      color: #fff;
-      text-align: center;
-      border-bottom: 1px solid #111;
-      font-size: 11px;
-    }
-  }
+  color: #ffffff;
+  font-size: 12px;
 }
 
+/* =========================================
+   TABLE HEADER
+========================================= */
+
+.pending-table thead {
+  background: #1e293b;
+}
+
+.pending-table th {
+  height: 44px;
+  padding: 0 12px;
+  border-right: 1px solid #273244;
+  border-bottom: 1px solid #374151;
+  color: #9ca3af;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.pending-table th:last-child {
+  border-right: none;
+}
+
+/* =========================================
+   TABLE BODY
+========================================= */
+
+.pending-table tbody {
+  background: #111827;
+}
+
+.pending-table td {
+  height: 44px;
+  padding: 0 12px;
+  border-right: 1px solid #1f2937;
+  border-bottom: 1px solid #1f2937;
+  color: #d1d5db;
+  white-space: nowrap;
+}
+
+.pending-table td:last-child {
+  border-right: none;
+}
+
+/* =========================================
+   ROW HOVER
+========================================= */
+
+.pending-table tbody tr:not(.empty-row):hover {
+  background: #172033;
+}
+
+/* =========================================
+   TRANSACTION TYPE
+========================================= */
+
+/* BUY */
+
+.pending-table td:nth-child(8) {
+  font-weight: 700;
+}
+
+/* You can add classes later for exact BUY/SELL colors */
+
+/* =========================================
+   STATUS
+========================================= */
+
+.pending-table td:nth-child(10) {
+  font-weight: 700;
+}
+
+/* =========================================
+   ACTION
+========================================= */
+
+.pending-table td:last-child {
+  min-width: 150px;
+}
+
+/* Replace inline flex style */
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* =========================================
+   CANCEL / MODIFY BUTTON
+========================================= */
+
+.clear-btn {
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid #4b5563;
+  border-radius: 5px;
+  background: #1f2937;
+  color: #d1d5db;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.clear-btn:hover {
+  background: #374151;
+  border-color: #6b7280;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.clear-btn:active {
+  transform: translateY(0);
+}
+
+/* First button = CANCEL */
+
+.pending-table td:last-child .clear-btn:first-child {
+  background: #7f1d1d;
+  border-color: #991b1b;
+  color: #fecaca;
+}
+
+.pending-table td:last-child .clear-btn:first-child:hover {
+  background: #dc2626;
+  border-color: #ef4444;
+  color: #ffffff;
+}
+
+/* Second button = MODIFY */
+
+.pending-table td:last-child .clear-btn:nth-child(2) {
+  background: #1e3a8a;
+  border-color: #1d4ed8;
+  color: #bfdbfe;
+}
+
+.pending-table td:last-child .clear-btn:nth-child(2):hover {
+  background: #2563eb;
+  border-color: #3b82f6;
+  color: #ffffff;
+}
+
+/* =========================================
+   EMPTY TABLE
+========================================= */
+
 .empty-table {
-  height: 450px;
-  vertical-align: middle;
+  height: 250px !important;
+  padding: 0 !important;
+  text-align: center !important;
+  border-right: none !important;
 }
 
 .empty-content {
+  min-height: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 6px;
+}
 
-  h2 {
-    color: #fff;
-    font-size: 20px;
-    margin-bottom: 8px;
+.empty-content h2 {
+  margin: 0;
+  color: #d1d5db;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.empty-content p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+  .pending-header {
+    padding: 14px;
   }
 
-  p {
-    color: #fff;
-    font-size: 16px;
+  .top-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .left-side {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .right-side {
+    width: 100%;
+  }
+
+  .reload-btn {
+    width: 100%;
+  }
+
+  .search-box {
+    flex: 1;
+    min-width: 150px;
+  }
+
+  select.search-box {
+    width: auto;
+    flex: 1;
+  }
+
+  .pl-section {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 3px;
+  }
+
+  .info-card {
+    flex: 1;
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 600px) {
+  .left-side {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .records-box,
+  .search-box,
+  select.search-box {
+    width: 100%;
+    flex: none;
+  }
+
+  .pl-section {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(120px, 1fr));
+    overflow-x: auto;
+  }
+
+  .info-card {
+    min-width: 120px;
+    padding: 9px 10px;
+  }
+
+  .info-card span {
+    font-size: 10px;
+  }
+
+  .info-card strong {
+    font-size: 14px;
+  }
+
+  .pending-table {
+    min-width: 1150px;
   }
 }

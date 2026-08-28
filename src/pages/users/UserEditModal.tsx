@@ -73,7 +73,7 @@ function UserEditModal({ user, onClose }: Props) {
 
             <div className="field">
               <span>USE MARGIN</span>
-              <strong>10,56,713</strong>
+              <strong>{user?.marginMultiplier != null ? Number(user.marginMultiplier) : 1}</strong>
             </div>
 
             <div className="button-group">
